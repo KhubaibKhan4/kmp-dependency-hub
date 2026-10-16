@@ -30,7 +30,7 @@ repositories {
 }
 
 // A local Android Studio / IntelliJ (from -P, ~/.gradle/gradle.properties or the git-ignored local.properties),
-// otherwise IntelliJ IDEA Community is downloaded (CI).
+// otherwise IntelliJ IDEA is downloaded (CI).
 val localIdePath: String? = providers.gradleProperty("kmphub.ideaLocalPath").orNull
     ?: rootProject.file("local.properties").takeIf { it.isFile }?.let { file ->
         Properties().apply { file.reader().use { load(it) } }.getProperty("kmphub.ideaLocalPath")
@@ -44,7 +44,8 @@ dependencies {
     }
 
     intellijPlatform {
-        if (localIde != null) local(localIde) else intellijIdeaCommunity(providers.gradleProperty("kmphub.ciPlatformVersion").get())
+        // IntelliJ IDEA ships as one distribution since 2025.3 (no separate Community artifact).
+        if (localIde != null) local(localIde) else intellijIdea(providers.gradleProperty("kmphub.ciPlatformVersion").get())
         testFramework(TestFrameworkType.Platform)
         pluginVerifier()
         zipSigner()

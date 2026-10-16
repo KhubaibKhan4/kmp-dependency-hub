@@ -75,4 +75,4 @@ the signed zip to a GitHub release. The **Build** workflow runs the same checks 
 ```
 
 Local builds use the IDE in `local.properties` (`kmphub.ideaLocalPath=…`, git-ignored); CI downloads IntelliJ IDEA
-Community `kmphub.ciPlatformVersion` instead.
+`kmphub.ciPlatformVersion` instead.
