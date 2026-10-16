@@ -33,22 +33,35 @@ sets the owner and vendor. That fixes the IDs, which can't change after the firs
 
 ### 3. Gradle Plugin Portal
 
-1. Sign in at <https://plugins.gradle.org> with the GitHub account that owns `io.github.<githubOwner>`.
-2. Profile → *API Keys* → copy the key and secret into the `GRADLE_PUBLISH_KEY` and `GRADLE_PUBLISH_SECRET` secrets.
-3. Optional dry run from your machine: `./gradlew :gradle-plugin:publishPlugins --validate-only -Pgradle.publish.key=… -Pgradle.publish.secret=…`.
-   New plugins are also reviewed before they're public.
+1. Sign in at <https://plugins.gradle.org> with the KhubaibKhan4 GitHub account (it owns `io.github.khubaibkhan4`).
+2. Profile → *API Keys* → generate a key and secret.
+3. Publish whenever you like, independent of Marketplace: *Actions → Publish Gradle plugin → Run workflow*, or
+   `gh workflow run publish-gradle-plugin.yml`. A new plugin is reviewed by Gradle before it's public.
 
 ### 4. GitHub secrets
 
-Repository → *Settings → Secrets and variables → Actions* → add:
+Store each secret with `gh secret set`; it prompts for the value, so it never lands in your shell history,
+a file or a chat:
+
+```bash
+R=KhubaibKhan4/kmp-dependency-hub
+gh secret set GRADLE_PUBLISH_KEY --repo $R
+gh secret set GRADLE_PUBLISH_SECRET --repo $R
+gh secret set PUBLISH_TOKEN --repo $R
+gh secret set PRIVATE_KEY_PASSWORD --repo $R
+gh secret set CERTIFICATE_CHAIN --repo $R < chain.crt
+gh secret set PRIVATE_KEY --repo $R < private_encrypted.pem
+```
 
 | Secret | From |
 |---|---|
+| `GRADLE_PUBLISH_KEY` / `GRADLE_PUBLISH_SECRET` | Plugin Portal API keys |
 | `PUBLISH_TOKEN` | Marketplace permanent token |
 | `CERTIFICATE_CHAIN` | `chain.crt` |
 | `PRIVATE_KEY` | `private_encrypted.pem` |
 | `PRIVATE_KEY_PASSWORD` | the key's password |
-| `GRADLE_PUBLISH_KEY` / `GRADLE_PUBLISH_SECRET` | Plugin Portal API keys |
+
+If a key or token is ever exposed (pasted somewhere, committed), revoke it and generate a new one.
 
 ## Every release
 
@@ -60,9 +73,10 @@ Repository → *Settings → Secrets and variables → Actions* → add:
    git tag v0.3.0 && git push origin v0.3.0
    ```
 
-The **Release** workflow checks the tag matches the version, builds and tests, runs the Plugin Verifier against the
-IDE versions JetBrains recommends, signs and publishes to Marketplace, publishes the Gradle plugin, and attaches
-the signed zip to a GitHub release. The **Build** workflow runs the same checks on every push and pull request.
+The **Release** workflow checks the tag matches the version, builds and tests, and runs the Plugin Verifier against
+the IDE versions JetBrains recommends. Then, as independent jobs, it signs and publishes to Marketplace, publishes
+the Gradle plugin, and attaches the plugin zip to a GitHub release. A store whose secrets aren't set is skipped
+with a notice instead of failing the release. The **Build** workflow runs the same checks on every push and pull request.
 
 ## Checks you can run locally
 
