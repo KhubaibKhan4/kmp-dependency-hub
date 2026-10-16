@@ -37,6 +37,15 @@ gradlePlugin {
                 "refuses libraries that don't support your targets."
             implementationClass = "io.github.kmphub.gradle.KmpHubPlugin"
             tags = listOf("kotlin-multiplatform", "kmp", "dependencies", "version-catalog", "compose-multiplatform", "android")
+            // Added at runtime by the Gradle Compatibility plugin (applied by plugin-publish), so no typed accessor.
+            (this as ExtensionAware).extensions.configure<org.gradle.plugin.compatibility.CompatibilityExtension>("compatibility") {
+                features {
+                    // The functional tests run every task with --configuration-cache.
+                    configurationCache = true
+                    // The root plugin reads every subproject's Kotlin model, which isolated projects forbids.
+                    isolatedProjects = false
+                }
+            }
         }
     }
 }
