@@ -2,10 +2,11 @@ package io.github.kmphub.idea
 
 import com.intellij.notification.NotificationGroupManager
 import com.intellij.notification.NotificationType
-import com.intellij.openapi.application.ReadAction
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.Computable
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VfsUtil
@@ -51,6 +52,9 @@ internal fun notify(project: Project, text: String, type: NotificationType = Not
     NotificationGroupManager.getInstance().getNotificationGroup("KMP Dependency Hub").createNotification(text, type).notify(project)
 }
 
-/** ReadAction.compute is deprecated in 2026.x in favour of computeBlocking, which 2025.x IDEs don't have yet. */
-@Suppress("DEPRECATION")
-internal fun <T> readAction(block: () -> T): T = ReadAction.compute<T, RuntimeException>(block)
+/**
+ * Application.runReadAction(Computable) is stable from 2025.1 through 2026.x, unlike ReadAction.compute
+ * (deprecated in 2026.x) and ReadAction.computeBlocking (missing before 2026.x).
+ */
+internal fun <T> readAction(block: () -> T): T =
+    ApplicationManager.getApplication().runReadAction(Computable { block() })

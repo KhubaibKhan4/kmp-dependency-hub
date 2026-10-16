@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.1
+
+- Clean JetBrains Plugin Verifier report on IntelliJ IDEA / Android Studio 2025.1 through 2026.x: no deprecated,
+  experimental or internal API usage.
+- Richer Marketplace description with features and getting started.
+- Privacy policy (no telemetry) linked from the listing.
+
 ## 0.3.0
 
 - Browse the top Kotlin Multiplatform libraries from klibs.io: 50 at a time, more as you scroll.

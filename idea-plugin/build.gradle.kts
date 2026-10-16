@@ -101,6 +101,11 @@ intellijPlatform {
         ides {
             if (localIde != null) local(localIde)
             if (providers.gradleProperty("kmphub.verifyRecommended").orNull == "true") recommended()
+            // e.g. -Pkmphub.verifyIdes=IC:2025.1.7,IC:2025.2.6 to reproduce a Marketplace verification report.
+            providers.gradleProperty("kmphub.verifyIdes").orNull?.split(',')?.filter { it.isNotBlank() }?.forEach {
+                val (type, version) = it.trim().split(':')
+                create(type, version)
+            }
         }
     }
 }
