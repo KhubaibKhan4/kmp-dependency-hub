@@ -15,7 +15,7 @@ select several at once, and add them to the right source sets — engines, KSP a
 [![Build](https://github.com/KhubaibKhan4/kmp-dependency-hub/actions/workflows/build.yml/badge.svg)](https://github.com/KhubaibKhan4/kmp-dependency-hub/actions/workflows/build.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
-[**Install from JetBrains Marketplace →**](https://plugins.jetbrains.com/plugin/35177)
+[**Install from JetBrains Marketplace →**](https://plugins.jetbrains.com/plugin/35177) &nbsp;·&nbsp; [**▶ Watch the 90-second tour**](https://youtu.be/iO_Yv1gEgvw)
 
 <img src="docs/screenshot.png" alt="KMP Dependency Hub tool window in Android Studio" width="900">
 
@@ -29,6 +29,13 @@ desktop? Does it need a Gradle plugin in the root build file? KSP for every targ
 lands in `commonMain`, your iOS build breaks.
 
 KMP Dependency Hub answers all of them for you, and shows you the diff before anything changes.
+
+## See it in action
+
+<a href="https://youtu.be/iO_Yv1gEgvw"><img src="https://img.youtube.com/vi/iO_Yv1gEgvw/maxresdefault.jpg" alt="Watch: KMP Dependency Hub in 90 seconds" width="720"></a>
+
+The problem, then the fix: browsing, multi-select, every artifact in the right source set, platform safety and the
+Gradle CLI. [Watch on YouTube](https://youtu.be/iO_Yv1gEgvw).
 
 ## Features
 

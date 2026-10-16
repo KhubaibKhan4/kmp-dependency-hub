@@ -36,6 +36,7 @@
       <li>Pick the module (and, optionally, a source set), press <b>Add</b>, review the diff and apply.</li>
       <li>Sync Gradle.</li>
     </ol>
+    <p><a href="https://youtu.be/iO_Yv1gEgvw">Watch the 90-second tour on YouTube</a>.</p>
     <p>Prefer the command line? The same engine ships as a Gradle plugin:
     <a href="https://github.com/KhubaibKhan4/kmp-dependency-hub#gradle-usage">kmpHubSearch, kmpHubAdd, kmpHubDoctor</a>.</p>
     ]]></description>

@@ -1,5 +1,7 @@
 # Tutorial video
 
+Published: <https://youtu.be/iO_Yv1gEgvw>
+
 An ~87 s animated 3D tutorial: the problem (versions, source sets, engines, KSP, a broken iOS build), then the hub
 (browse, multi-select, correct placement, platform safety, Gradle CLI, benefits).
 
