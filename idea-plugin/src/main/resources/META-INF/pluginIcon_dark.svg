@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="2" y1="2" x2="38" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9B7BFF"/>
+      <stop offset="0.55" stop-color="#7476F5"/>
+      <stop offset="1" stop-color="#42A5F5"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="36" height="36" rx="9" fill="url(#bg)"/>
+  <!-- spokes from the hub to the four platforms -->
+  <g stroke="#FFFFFF" stroke-opacity="0.75" stroke-width="2" stroke-linecap="round">
+    <path d="M20 20 L10.5 10.5"/>
+    <path d="M20 20 L29.5 10.5"/>
+    <path d="M20 20 L10.5 29.5"/>
+    <path d="M20 20 L29.5 29.5"/>
+  </g>
+  <!-- platform nodes: Android, iOS, desktop, web -->
+  <circle cx="10" cy="10" r="4" fill="#3DDC84" stroke="#FFFFFF" stroke-width="1.5"/>
+  <circle cx="30" cy="10" r="4" fill="#E3E8EF" stroke="#FFFFFF" stroke-width="1.5"/>
+  <circle cx="10" cy="30" r="4" fill="#FFB238" stroke="#FFFFFF" stroke-width="1.5"/>
+  <circle cx="30" cy="30" r="4" fill="#B49CFF" stroke="#FFFFFF" stroke-width="1.5"/>
+  <!-- hub with an add mark -->
+  <circle cx="20" cy="20" r="7" fill="#FFFFFF"/>
+  <path d="M20 16.5 V23.5 M16.5 20 H23.5" stroke="#6D4CF2" stroke-width="2.4" stroke-linecap="round"/>
+</svg>

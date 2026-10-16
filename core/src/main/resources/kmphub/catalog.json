@@ -1,0 +1,692 @@
+{
+  "schema": 1,
+  "libraries": [
+    {
+      "id": "ktor-client",
+      "name": "Ktor Client",
+      "category": "Networking",
+      "description": "HTTP client with per-platform engines and JSON content negotiation.",
+      "website": "https://ktor.io/docs/client-create-multiplatform-application.html",
+      "platforms": [
+        "ANDROID",
+        "IOS",
+        "JVM",
+        "JS",
+        "WASM",
+        "NATIVE"
+      ],
+      "versions": {
+        "ktor": "3.6.0",
+        "kotlin": "2.4.21"
+      },
+      "artifacts": [
+        {
+          "alias": "ktor-client-core",
+          "module": "io.ktor:ktor-client-core",
+          "versionRef": "ktor"
+        },
+        {
+          "alias": "ktor-client-content-negotiation",
+          "module": "io.ktor:ktor-client-content-negotiation",
+          "versionRef": "ktor"
+        },
+        {
+          "alias": "ktor-serialization-kotlinx-json",
+          "module": "io.ktor:ktor-serialization-kotlinx-json",
+          "versionRef": "ktor"
+        },
+        {
+          "alias": "ktor-client-logging",
+          "module": "io.ktor:ktor-client-logging",
+          "versionRef": "ktor"
+        },
+        {
+          "alias": "ktor-client-okhttp",
+          "module": "io.ktor:ktor-client-okhttp",
+          "versionRef": "ktor",
+          "on": "android"
+        },
+        {
+          "alias": "ktor-client-darwin",
+          "module": "io.ktor:ktor-client-darwin",
+          "versionRef": "ktor",
+          "on": "ios"
+        },
+        {
+          "alias": "ktor-client-java",
+          "module": "io.ktor:ktor-client-java",
+          "versionRef": "ktor",
+          "on": "jvm"
+        },
+        {
+          "alias": "ktor-client-js",
+          "module": "io.ktor:ktor-client-js",
+          "versionRef": "ktor",
+          "on": "js"
+        },
+        {
+          "alias": "ktor-client-js",
+          "module": "io.ktor:ktor-client-js",
+          "versionRef": "ktor",
+          "on": "wasm"
+        }
+      ],
+      "plugins": [
+        {
+          "alias": "kotlinx-serialization",
+          "id": "org.jetbrains.kotlin.plugin.serialization",
+          "versionRef": "kotlin"
+        }
+      ],
+      "klibs": "ktorio/ktor"
+    },
+    {
+      "id": "kotlinx-serialization",
+      "name": "kotlinx.serialization JSON",
+      "category": "Serialization",
+      "description": "Kotlin's multiplatform serialization with the JSON format and compiler plugin.",
+      "website": "https://github.com/Kotlin/kotlinx.serialization",
+      "platforms": [
+        "ANDROID",
+        "IOS",
+        "JVM",
+        "JS",
+        "WASM",
+        "NATIVE"
+      ],
+      "versions": {
+        "kotlinx-serialization": "1.11.0",
+        "kotlin": "2.4.21"
+      },
+      "artifacts": [
+        {
+          "alias": "kotlinx-serialization-json",
+          "module": "org.jetbrains.kotlinx:kotlinx-serialization-json",
+          "versionRef": "kotlinx-serialization"
+        }
+      ],
+      "plugins": [
+        {
+          "alias": "kotlinx-serialization",
+          "id": "org.jetbrains.kotlin.plugin.serialization",
+          "versionRef": "kotlin"
+        }
+      ],
+      "klibs": "kotlin/kotlinx.serialization"
+    },
+    {
+      "id": "kotlinx-coroutines",
+      "name": "kotlinx.coroutines",
+      "category": "Concurrency",
+      "description": "Coroutines, Flow and the Android main dispatcher.",
+      "website": "https://github.com/Kotlin/kotlinx.coroutines",
+      "platforms": [
+        "ANDROID",
+        "IOS",
+        "JVM",
+        "JS",
+        "WASM",
+        "NATIVE"
+      ],
+      "versions": {
+        "kotlinx-coroutines": "1.11.0"
+      },
+      "artifacts": [
+        {
+          "alias": "kotlinx-coroutines-core",
+          "module": "org.jetbrains.kotlinx:kotlinx-coroutines-core",
+          "versionRef": "kotlinx-coroutines"
+        },
+        {
+          "alias": "kotlinx-coroutines-android",
+          "module": "org.jetbrains.kotlinx:kotlinx-coroutines-android",
+          "versionRef": "kotlinx-coroutines",
+          "on": "android"
+        },
+        {
+          "alias": "kotlinx-coroutines-swing",
+          "module": "org.jetbrains.kotlinx:kotlinx-coroutines-swing",
+          "versionRef": "kotlinx-coroutines",
+          "on": "jvm"
+        },
+        {
+          "alias": "kotlinx-coroutines-test",
+          "module": "org.jetbrains.kotlinx:kotlinx-coroutines-test",
+          "versionRef": "kotlinx-coroutines",
+          "on": "commonTest"
+        }
+      ],
+      "klibs": "kotlin/kotlinx.coroutines"
+    },
+    {
+      "id": "kotlinx-datetime",
+      "name": "kotlinx-datetime",
+      "category": "Utilities",
+      "description": "Multiplatform date and time types.",
+      "website": "https://github.com/Kotlin/kotlinx-datetime",
+      "platforms": [
+        "ANDROID",
+        "IOS",
+        "JVM",
+        "JS",
+        "WASM",
+        "NATIVE"
+      ],
+      "versions": {
+        "kotlinx-datetime": "0.8.0"
+      },
+      "artifacts": [
+        {
+          "alias": "kotlinx-datetime",
+          "module": "org.jetbrains.kotlinx:kotlinx-datetime",
+          "versionRef": "kotlinx-datetime"
+        }
+      ],
+      "klibs": "kotlin/kotlinx-datetime"
+    },
+    {
+      "id": "koin",
+      "name": "Koin",
+      "category": "Dependency Injection",
+      "description": "Pragmatic DI with Compose and ViewModel integrations.",
+      "website": "https://insert-koin.io/docs/reference/koin-mp/kmp",
+      "platforms": [
+        "ANDROID",
+        "IOS",
+        "JVM",
+        "JS",
+        "WASM",
+        "NATIVE"
+      ],
+      "versions": {
+        "koin": "4.2.2"
+      },
+      "artifacts": [
+        {
+          "alias": "koin-bom",
+          "module": "io.insert-koin:koin-bom",
+          "versionRef": "koin",
+          "bom": true
+        },
+        {
+          "alias": "koin-core",
+          "module": "io.insert-koin:koin-core",
+          "versionRef": null
+        },
+        {
+          "alias": "koin-compose",
+          "module": "io.insert-koin:koin-compose",
+          "versionRef": null
+        },
+        {
+          "alias": "koin-compose-viewmodel",
+          "module": "io.insert-koin:koin-compose-viewmodel",
+          "versionRef": null
+        },
+        {
+          "alias": "koin-android",
+          "module": "io.insert-koin:koin-android",
+          "versionRef": null,
+          "on": "android"
+        },
+        {
+          "alias": "koin-test",
+          "module": "io.insert-koin:koin-test",
+          "versionRef": null,
+          "on": "commonTest"
+        }
+      ],
+      "notes": [
+        "Call startKoin { modules(...) } from each platform entry point, or use KoinApplication in Compose."
+      ],
+      "klibs": "insertkoinio/koin"
+    },
+    {
+      "id": "room",
+      "name": "Room (KMP)",
+      "category": "Database",
+      "description": "Jetpack Room for Android, iOS and JVM with the bundled SQLite driver.",
+      "website": "https://developer.android.com/kotlin/multiplatform/room",
+      "platforms": [
+        "ANDROID",
+        "IOS",
+        "JVM"
+      ],
+      "versions": {
+        "room": "2.8.5",
+        "sqlite": "2.7.1",
+        "ksp": "2.3.12"
+      },
+      "artifacts": [
+        {
+          "alias": "androidx-room-runtime",
+          "module": "androidx.room:room-runtime",
+          "versionRef": "room"
+        },
+        {
+          "alias": "androidx-sqlite-bundled",
+          "module": "androidx.sqlite:sqlite-bundled",
+          "versionRef": "sqlite"
+        },
+        {
+          "alias": "androidx-room-compiler",
+          "module": "androidx.room:room-compiler",
+          "versionRef": "room",
+          "configuration": "ksp"
+        }
+      ],
+      "plugins": [
+        {
+          "alias": "ksp",
+          "id": "com.google.devtools.ksp",
+          "versionRef": "ksp"
+        },
+        {
+          "alias": "androidx-room",
+          "id": "androidx.room",
+          "versionRef": "room"
+        }
+      ],
+      "blocks": [
+        {
+          "header": "room",
+          "lines": [
+            "schemaDirectory(\"$projectDir/schemas\")"
+          ]
+        }
+      ],
+      "klibs": "androidx/room"
+    },
+    {
+      "id": "sqldelight",
+      "name": "SQLDelight",
+      "category": "Database",
+      "description": "Typesafe Kotlin APIs generated from SQL, with a driver per platform.",
+      "website": "https://sqldelight.github.io/sqldelight/",
+      "platforms": [
+        "ANDROID",
+        "IOS",
+        "JVM",
+        "JS",
+        "WASM",
+        "NATIVE"
+      ],
+      "versions": {
+        "sqldelight": "2.4.1"
+      },
+      "artifacts": [
+        {
+          "alias": "sqldelight-runtime",
+          "module": "app.cash.sqldelight:runtime",
+          "versionRef": "sqldelight"
+        },
+        {
+          "alias": "sqldelight-coroutines",
+          "module": "app.cash.sqldelight:coroutines-extensions",
+          "versionRef": "sqldelight"
+        },
+        {
+          "alias": "sqldelight-android-driver",
+          "module": "app.cash.sqldelight:android-driver",
+          "versionRef": "sqldelight",
+          "on": "android"
+        },
+        {
+          "alias": "sqldelight-native-driver",
+          "module": "app.cash.sqldelight:native-driver",
+          "versionRef": "sqldelight",
+          "on": "ios"
+        },
+        {
+          "alias": "sqldelight-sqlite-driver",
+          "module": "app.cash.sqldelight:sqlite-driver",
+          "versionRef": "sqldelight",
+          "on": "jvm"
+        },
+        {
+          "alias": "sqldelight-web-driver",
+          "module": "app.cash.sqldelight:web-worker-driver",
+          "versionRef": "sqldelight",
+          "on": "js"
+        }
+      ],
+      "plugins": [
+        {
+          "alias": "sqldelight",
+          "id": "app.cash.sqldelight",
+          "versionRef": "sqldelight"
+        }
+      ],
+      "notes": [
+        "Declare your database: sqldelight { databases { create(\"AppDatabase\") { packageName.set(\"com.example\") } } }"
+      ],
+      "klibs": "sqldelight/sqldelight"
+    },
+    {
+      "id": "datastore",
+      "name": "DataStore Preferences",
+      "category": "Storage",
+      "description": "Jetpack DataStore key-value storage for Android, iOS and JVM.",
+      "website": "https://developer.android.com/kotlin/multiplatform/datastore",
+      "platforms": [
+        "ANDROID",
+        "IOS",
+        "JVM"
+      ],
+      "versions": {
+        "datastore": "1.2.1"
+      },
+      "artifacts": [
+        {
+          "alias": "androidx-datastore-preferences",
+          "module": "androidx.datastore:datastore-preferences",
+          "versionRef": "datastore"
+        }
+      ],
+      "klibs": "androidx/datastore"
+    },
+    {
+      "id": "multiplatform-settings",
+      "name": "Multiplatform Settings",
+      "category": "Storage",
+      "description": "SharedPreferences / NSUserDefaults style key-value storage everywhere.",
+      "website": "https://github.com/russhwolf/multiplatform-settings",
+      "platforms": [
+        "ANDROID",
+        "IOS",
+        "JVM",
+        "JS",
+        "WASM",
+        "NATIVE"
+      ],
+      "versions": {
+        "multiplatform-settings": "1.3.0"
+      },
+      "artifacts": [
+        {
+          "alias": "multiplatform-settings",
+          "module": "com.russhwolf:multiplatform-settings",
+          "versionRef": "multiplatform-settings"
+        },
+        {
+          "alias": "multiplatform-settings-no-arg",
+          "module": "com.russhwolf:multiplatform-settings-no-arg",
+          "versionRef": "multiplatform-settings"
+        }
+      ],
+      "klibs": "russhwolf/multiplatform-settings"
+    },
+    {
+      "id": "coil",
+      "name": "Coil 3",
+      "category": "Images",
+      "description": "Image loading for Compose Multiplatform, using Ktor for network images.",
+      "website": "https://coil-kt.github.io/coil/",
+      "platforms": [
+        "ANDROID",
+        "IOS",
+        "JVM",
+        "JS",
+        "WASM"
+      ],
+      "versions": {
+        "coil": "3.6.3"
+      },
+      "artifacts": [
+        {
+          "alias": "coil-compose",
+          "module": "io.coil-kt.coil3:coil-compose",
+          "versionRef": "coil"
+        },
+        {
+          "alias": "coil-network-ktor3",
+          "module": "io.coil-kt.coil3:coil-network-ktor3",
+          "versionRef": "coil"
+        }
+      ],
+      "notes": [
+        "Coil's network module needs a Ktor engine per platform; add the ktor-client recipe too."
+      ],
+      "klibs": "coil-kt/coil"
+    },
+    {
+      "id": "navigation-compose",
+      "name": "Navigation Compose (CMP)",
+      "category": "Navigation",
+      "description": "JetBrains' multiplatform port of Jetpack Navigation for Compose.",
+      "website": "https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html",
+      "platforms": [
+        "ANDROID",
+        "IOS",
+        "JVM",
+        "JS",
+        "WASM"
+      ],
+      "versions": {
+        "navigation-compose": "2.9.2"
+      },
+      "artifacts": [
+        {
+          "alias": "navigation-compose",
+          "module": "org.jetbrains.androidx.navigation:navigation-compose",
+          "versionRef": "navigation-compose"
+        }
+      ]
+    },
+    {
+      "id": "lifecycle-viewmodel",
+      "name": "Lifecycle ViewModel (CMP)",
+      "category": "Architecture",
+      "description": "Multiplatform ViewModel and lifecycle-aware Compose APIs.",
+      "website": "https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-viewmodel.html",
+      "platforms": [
+        "ANDROID",
+        "IOS",
+        "JVM",
+        "JS",
+        "WASM"
+      ],
+      "versions": {
+        "androidx-lifecycle": "2.11.0"
+      },
+      "artifacts": [
+        {
+          "alias": "androidx-lifecycle-viewmodel-compose",
+          "module": "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose",
+          "versionRef": "androidx-lifecycle"
+        },
+        {
+          "alias": "androidx-lifecycle-runtime-compose",
+          "module": "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose",
+          "versionRef": "androidx-lifecycle"
+        }
+      ]
+    },
+    {
+      "id": "kermit",
+      "name": "Kermit",
+      "category": "Logging",
+      "description": "Touchlab's multiplatform logger.",
+      "website": "https://kermit.touchlab.co",
+      "platforms": [
+        "ANDROID",
+        "IOS",
+        "JVM",
+        "JS",
+        "WASM",
+        "NATIVE"
+      ],
+      "versions": {
+        "kermit": "2.2.0"
+      },
+      "artifacts": [
+        {
+          "alias": "kermit",
+          "module": "co.touchlab:kermit",
+          "versionRef": "kermit"
+        }
+      ],
+      "klibs": "touchlab/kermit"
+    },
+    {
+      "id": "turbine",
+      "name": "Turbine",
+      "category": "Testing",
+      "description": "Small testing library for kotlinx.coroutines Flow.",
+      "website": "https://github.com/cashapp/turbine",
+      "platforms": [
+        "ANDROID",
+        "IOS",
+        "JVM",
+        "JS",
+        "WASM",
+        "NATIVE"
+      ],
+      "versions": {
+        "turbine": "1.2.1"
+      },
+      "artifacts": [
+        {
+          "alias": "turbine",
+          "module": "app.cash.turbine:turbine",
+          "versionRef": "turbine",
+          "on": "commonTest"
+        }
+      ],
+      "klibs": "cashapp/turbine"
+    },
+    {
+      "id": "compose-bom",
+      "name": "Jetpack Compose (Android)",
+      "category": "UI",
+      "description": "Android-only Jetpack Compose via the Compose BOM.",
+      "website": "https://developer.android.com/develop/ui/compose/bom",
+      "platforms": [
+        "ANDROID"
+      ],
+      "versions": {
+        "compose-bom": "2026.09.00"
+      },
+      "artifacts": [
+        {
+          "alias": "androidx-compose-bom",
+          "module": "androidx.compose:compose-bom",
+          "versionRef": "compose-bom",
+          "bom": true
+        },
+        {
+          "alias": "androidx-compose-ui",
+          "module": "androidx.compose.ui:ui",
+          "versionRef": null
+        },
+        {
+          "alias": "androidx-compose-material3",
+          "module": "androidx.compose.material3:material3",
+          "versionRef": null
+        },
+        {
+          "alias": "androidx-compose-ui-tooling-preview",
+          "module": "androidx.compose.ui:ui-tooling-preview",
+          "versionRef": null
+        }
+      ]
+    },
+    {
+      "id": "hilt",
+      "name": "Hilt",
+      "category": "Dependency Injection",
+      "description": "Android-only DI built on Dagger, with KSP.",
+      "website": "https://developer.android.com/training/dependency-injection/hilt-android",
+      "platforms": [
+        "ANDROID"
+      ],
+      "versions": {
+        "hilt": "2.60.1",
+        "ksp": "2.3.12"
+      },
+      "artifacts": [
+        {
+          "alias": "hilt-android",
+          "module": "com.google.dagger:hilt-android",
+          "versionRef": "hilt"
+        },
+        {
+          "alias": "hilt-compiler",
+          "module": "com.google.dagger:hilt-compiler",
+          "versionRef": "hilt",
+          "configuration": "ksp"
+        }
+      ],
+      "plugins": [
+        {
+          "alias": "ksp",
+          "id": "com.google.devtools.ksp",
+          "versionRef": "ksp"
+        },
+        {
+          "alias": "hilt",
+          "id": "com.google.dagger.hilt.android",
+          "versionRef": "hilt"
+        }
+      ],
+      "notes": [
+        "Annotate your Application class with @HiltAndroidApp."
+      ]
+    },
+    {
+      "id": "retrofit",
+      "name": "Retrofit",
+      "category": "Networking",
+      "description": "Type-safe HTTP client for Android and the JVM, with kotlinx.serialization.",
+      "website": "https://square.github.io/retrofit/",
+      "platforms": [
+        "ANDROID",
+        "JVM"
+      ],
+      "versions": {
+        "retrofit": "3.0.0"
+      },
+      "artifacts": [
+        {
+          "alias": "retrofit",
+          "module": "com.squareup.retrofit2:retrofit",
+          "versionRef": "retrofit"
+        },
+        {
+          "alias": "retrofit-kotlinx-serialization",
+          "module": "com.squareup.retrofit2:converter-kotlinx-serialization",
+          "versionRef": "retrofit"
+        }
+      ]
+    },
+    {
+      "id": "firebase-bom",
+      "name": "Firebase (Android)",
+      "category": "Backend",
+      "description": "Firebase Android SDKs managed by the Firebase BOM.",
+      "website": "https://firebase.google.com/docs/android/setup",
+      "platforms": [
+        "ANDROID"
+      ],
+      "versions": {
+        "firebase-bom": "35.0.2"
+      },
+      "artifacts": [
+        {
+          "alias": "firebase-bom",
+          "module": "com.google.firebase:firebase-bom",
+          "versionRef": "firebase-bom",
+          "bom": true
+        },
+        {
+          "alias": "firebase-analytics",
+          "module": "com.google.firebase:firebase-analytics",
+          "versionRef": null
+        }
+      ],
+      "notes": [
+        "Apply the com.google.gms.google-services plugin and add google-services.json."
+      ]
+    }
+  ]
+}

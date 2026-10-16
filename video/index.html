@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>KMP Dependency Hub — video</title>
+<style>html,body{margin:0;background:#000;overflow:hidden}canvas{display:block}</style>
+</head>
+<body>
+<script type="module">
+import { THREE, applyAlpha, drawCaption, clamp, seg } from './kit.js';
+import { buildScenes } from './scenes.js';
+
+const TL = await (await fetch('build/timeline.json')).json();
+const { width: W, height: H, fps } = TL;
+const params = new URLSearchParams(location.search);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true, powerPreference: 'high-performance' });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(40, W / H, 0.1, 400);
+
+// Background: deep violet radial gradient.
+{
+  const c = document.createElement('canvas'); c.width = 1024; c.height = 576;
+  const x = c.getContext('2d');
+  const g = x.createRadialGradient(512, 250, 40, 512, 288, 700);
+  g.addColorStop(0, '#2a1c5c'); g.addColorStop(0.45, '#14113a'); g.addColorStop(1, '#05050d');
+  x.fillStyle = g; x.fillRect(0, 0, 1024, 576);
+  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
+  scene.background = tex;
+}
+// Lights: cool key, violet and blue rims.
+scene.add(new THREE.AmbientLight('#8c86c8', 0.9));
+const key = new THREE.DirectionalLight('#ffffff', 2.2); key.position.set(4, 6, 8); scene.add(key);
+const rimA = new THREE.PointLight('#9b6bff', 60, 40); rimA.position.set(-8, 4, 4); scene.add(rimA);
+const rimB = new THREE.PointLight('#3ea0ff', 50, 40); rimB.position.set(8, -3, 5); scene.add(rimB);
+// Star field.
+const stars = (() => {
+  const n = 1400, pos = new Float32Array(n * 3);
+  let s = 1234567;
+  const rnd = () => ((s = (s * 16807) % 2147483647) / 2147483647);
+  for (let i = 0; i < n; i++) {
+    const r = 30 + rnd() * 70, th = rnd() * Math.PI * 2, ph = Math.acos(2 * rnd() - 1);
+    pos.set([r * Math.sin(ph) * Math.cos(th), r * Math.sin(ph) * Math.sin(th) * 0.6, -Math.abs(r * Math.cos(ph)) - 10], i * 3);
+  }
+  const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const pts = new THREE.Points(geo, new THREE.PointsMaterial({ color: '#c9c3ff', size: 0.16, transparent: true, opacity: 0.75, depthWrite: false }));
+  scene.add(pts); return pts;
+})();
+
+const S = buildScenes(scene);
+
+// 2D composite: WebGL frame + captions + dip-to-black transitions.
+const out = document.createElement('canvas'); out.width = W; out.height = H;
+const octx = out.getContext('2d');
+document.body.appendChild(out);
+out.style.width = '100vw';
+
+const DIP = 0.32;
+function renderAt(t) {
+  const i = Math.max(0, TL.scenes.findIndex((s) => t >= s.start && t < s.end));
+  const sc = TL.scenes[i] ?? TL.scenes[TL.scenes.length - 1];
+  for (const k of Object.keys(S)) S[k].group.visible = false;
+  const dur = sc.end - sc.start, lt = t - sc.start, p = clamp(lt / dur);
+  const active = S[sc.id];
+  active.group.visible = true;
+  active.update(p, lt, dur, camera);
+  applyAlpha(active.group);
+  stars.rotation.y = t * 0.012; stars.rotation.x = Math.sin(t * 0.05) * 0.05;
+  renderer.render(scene, camera);
+
+  octx.globalAlpha = 1;
+  octx.drawImage(renderer.domElement, 0, 0);
+  // caption: in shortly after the scene starts, out before it ends
+  const capA = clamp((lt - 0.35) / 0.35) * clamp((sc.end - t - 0.25) / 0.3);
+  drawCaption(octx, W, H, sc.caption, capA);
+  // dip to black between scenes; fade in at the very start and out at the very end
+  let dark = 0;
+  if (i > 0) dark = Math.max(dark, 1 - clamp(lt / DIP));
+  if (i < TL.scenes.length - 1) dark = Math.max(dark, 1 - clamp((sc.end - t) / DIP));
+  if (i === 0) dark = Math.max(dark, 1 - clamp(t / 0.8));
+  if (i === TL.scenes.length - 1) dark = Math.max(dark, seg(t, TL.duration - 1.0, TL.duration));
+  if (dark > 0) { octx.fillStyle = `rgba(0,0,0,${dark})`; octx.fillRect(0, 0, W, H); }
+}
+
+const toBlob = (q) => new Promise((r) => out.toBlob(r, 'image/jpeg', q));
+
+window.renderAt = renderAt;
+const mode = params.get('mode');
+if (mode === 'render') {
+  // Render frames [from, to) and POST each to the local capture server.
+  const from = +params.get('from'), to = +params.get('to');
+  for (let f = from; f < to; f++) {
+    renderAt(f / fps);
+    const blob = await toBlob(0.94);
+    await fetch(`/frame?i=${f}`, { method: 'POST', body: blob });
+  }
+  await fetch(`/done?worker=${params.get('worker')}`, { method: 'POST' });
+} else if (mode === 'stills') {
+  for (const t of params.get('t').split(',').map(Number)) {
+    renderAt(t);
+    const blob = await toBlob(0.9);
+    await fetch(`/still?t=${t}`, { method: 'POST', body: blob });
+  }
+  await fetch('/done?worker=stills', { method: 'POST' });
+} else {
+  // Live preview in a browser: real-time playback.
+  const t0 = performance.now();
+  const loop = () => { renderAt(((performance.now() - t0) / 1000) % TL.duration); requestAnimationFrame(loop); };
+  loop();
+}
+</script>
+</body>
+</html>

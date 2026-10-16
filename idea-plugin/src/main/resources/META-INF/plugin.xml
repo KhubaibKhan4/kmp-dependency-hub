@@ -1,0 +1,26 @@
+<idea-plugin>
+    <id>io.github.khubaibkhan4.kmpdependencyhub</id>
+    <name>KMP Dependency Hub</name>
+    <vendor>KMP Dependency Hub</vendor>
+    <description><![CDATA[
+    Browse curated Kotlin Multiplatform, Compose Multiplatform and Android libraries and add several at once
+    to any module. Each library is placed in the right source sets (commonMain, androidMain, iosMain, ...),
+    with version catalog entries, KSP configurations and Gradle plugins, and you see a diff before anything
+    is written. The Doctor flags commonMain dependencies that don't support your targets.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="KMP Hub" anchor="right" icon="/icons/hubToolWindow.svg"
+                    factoryClass="io.github.kmphub.idea.HubToolWindowFactory"/>
+        <notificationGroup id="KMP Dependency Hub" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="KmpHub.Doctor" class="io.github.kmphub.idea.DoctorAction"
+                text="KMP Hub: Run Doctor" description="Check KMP dependencies for platform and version problems">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>

@@ -1,0 +1,43 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      verifyRecommended:
+        description: Also run the Plugin Verifier against JetBrains' recommended IDEs (downloads several GB)
+        type: boolean
+        default: false
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: 25
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build and test
+        # Test suites that need the network (live Maven / klibs.io) run too; they are quick.
+        run: ./gradlew build
+
+      - name: Verify plugin against recommended IDEs
+        if: ${{ inputs.verifyRecommended }}
+        run: ./gradlew :idea-plugin:verifyPlugin -Pkmphub.verifyRecommended=true
+
+      - name: Validate Gradle plugin
+        run: ./gradlew :gradle-plugin:validatePlugins :gradle-plugin:generatePomFileForPluginMavenPublication
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kmp-dependency-hub-plugin
+          path: idea-plugin/build/distributions/*.zip

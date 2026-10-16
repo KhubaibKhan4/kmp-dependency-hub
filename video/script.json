@@ -1,0 +1,68 @@
+{
+  "voice": "Samantha",
+  "rate": 178,
+  "scenes": [
+    {
+      "id": "problem",
+      "pad": 0.9,
+      "text": "You're building a Kotlin Multiplatform app. You need networking, so you reach for Ktor. And then the questions start."
+    },
+    {
+      "id": "pain",
+      "pad": 0.7,
+      "text": "Which version? The core goes in common main, OkHttp in android main, Darwin in iOS main, and a serialization plugin in the root build. Room needs KSP for every target. Put one Android-only library in common main, and your iOS build breaks."
+    },
+    {
+      "id": "intro",
+      "pad": 0.8,
+      "text": "Meet KMP Dependency Hub. Every Kotlin Multiplatform dependency, in one place, right inside Android Studio."
+    },
+    {
+      "id": "browse",
+      "pad": 0.6,
+      "text": "Browse the top libraries from klibs dot io, ranked by stars, across twenty-two categories. New libraries show up as soon as they're published."
+    },
+    {
+      "id": "select",
+      "pad": 0.6,
+      "text": "Tick Ktor, Koin and Room. Pick your module, and press Add."
+    },
+    {
+      "id": "placement",
+      "pad": 0.8,
+      "text": "The hub writes everything in the right place. The version catalog. Common main, android main and iOS main. KSP for every target. And the Gradle plugins. You review the diff before anything changes."
+    },
+    {
+      "id": "safety",
+      "pad": 0.6,
+      "text": "It knows what each library supports. An Android-only library stays out of common main, before it breaks your iOS build."
+    },
+    {
+      "id": "cli",
+      "pad": 0.6,
+      "text": "Prefer the terminal? The same engine runs in Gradle. Search, add, and run the doctor in CI."
+    },
+    {
+      "id": "benefits",
+      "pad": 0.7,
+      "text": "Less time in docs. No wrong source sets. Always the latest stable versions. Your whole stack, in one click."
+    },
+    {
+      "id": "outro",
+      "pad": 1.6,
+      "text": "KMP Dependency Hub. Install it from JetBrains Marketplace."
+    }
+  ],
+  "captions": {
+    "problem": "You're building a Kotlin Multiplatform app… you reach for Ktor. Then the questions start.",
+    "pain": "Which version? Which source set? Which engine per platform? KSP for every target?",
+    "intro": "",
+    "browse": "Top KMP libraries from klibs.io · 22 categories · always current",
+    "select": "Multi-select → pick a module → Add",
+    "placement": "Version catalog · commonMain · androidMain · iosMain · KSP · Gradle plugins",
+    "safety": "Platform-aware: Android-only libraries stay out of commonMain",
+    "cli": "Same engine in Gradle: kmpHubSearch · kmpHubAdd · kmpHubDoctor",
+    "benefits": "Less docs · No wrong source sets · Latest stable · One click",
+    "outro": ""
+  }
+}

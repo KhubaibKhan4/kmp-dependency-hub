@@ -1,0 +1,47 @@
+name: Release
+
+# Push a tag like v0.3.0 (matching kmphub.version in gradle.properties) to publish.
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: 25
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Check tag matches version
+        run: |
+          VERSION=$(grep '^kmphub.version=' gradle.properties | cut -d= -f2)
+          [ "v$VERSION" = "$GITHUB_REF_NAME" ] || { echo "Tag $GITHUB_REF_NAME doesn't match kmphub.version=$VERSION"; exit 1; }
+
+      - name: Build, test and verify
+        run: ./gradlew build :idea-plugin:verifyPlugin -Pkmphub.verifyRecommended=true
+
+      - name: Sign and publish to JetBrains Marketplace
+        env:
+          CERTIFICATE_CHAIN: ${{ secrets.CERTIFICATE_CHAIN }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          PRIVATE_KEY_PASSWORD: ${{ secrets.PRIVATE_KEY_PASSWORD }}
+          PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+        run: ./gradlew :idea-plugin:publishPlugin
+
+      - name: Publish to Gradle Plugin Portal
+        env:
+          GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
+          GRADLE_PUBLISH_SECRET: ${{ secrets.GRADLE_PUBLISH_SECRET }}
+        run: ./gradlew :gradle-plugin:publishPlugins -Pgradle.publish.key="$GRADLE_PUBLISH_KEY" -Pgradle.publish.secret="$GRADLE_PUBLISH_SECRET"
+
+      - name: GitHub release with the signed zip
+        uses: softprops/action-gh-release@v2
+        with:
+          files: idea-plugin/build/distributions/*-signed.zip
+          generate_release_notes: true

@@ -1,0 +1,11 @@
+.gradle/
+build/
+.idea/
+.kotlin/
+*.iml
+local.properties
+.intellijPlatform/
+video/build/
+dist/
+.DS_Store
+*.hprof
