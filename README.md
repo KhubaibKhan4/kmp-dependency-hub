@@ -2,6 +2,9 @@
 
 [![Build](https://github.com/KhubaibKhan4/kmp-dependency-hub/actions/workflows/build.yml/badge.svg)](https://github.com/KhubaibKhan4/kmp-dependency-hub/actions/workflows/build.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+[![JetBrains Marketplace](https://img.shields.io/badge/JetBrains-Marketplace-7f52ff.svg)](https://plugins.jetbrains.com/plugin/35177)
+
+![KMP Dependency Hub](docs/screenshot.png)
 
 Add Kotlin Multiplatform, Compose Multiplatform and Android libraries to the right place in one step,
 from the IDE or from `./gradlew`.
@@ -22,7 +25,7 @@ in `commonMain` when it doesn't publish for every target the module compiles for
 
 The curated data lives in [`core/src/main/resources/kmphub/catalog.json`](core/src/main/resources/kmphub/catalog.json).
 
-Publishing to JetBrains Marketplace and the Gradle Plugin Portal: see [PUBLISHING.md](PUBLISHING.md).
+Publishing to JetBrains Marketplace and the Gradle Plugin Portal: see [PUBLISHING.md](PUBLISHING.md). Privacy: [PRIVACY.md](PRIVACY.md) — no telemetry.
 
 ## Install in Android Studio
 

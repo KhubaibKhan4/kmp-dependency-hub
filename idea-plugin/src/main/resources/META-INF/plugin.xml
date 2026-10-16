@@ -1,12 +1,43 @@
 <idea-plugin>
-    <id>io.github.khubaibkhan4.kmpdependencyhub</id>
+    <id>io.github.kmphub.idea</id>
     <name>KMP Dependency Hub</name>
     <vendor>KMP Dependency Hub</vendor>
     <description><![CDATA[
-    Browse curated Kotlin Multiplatform, Compose Multiplatform and Android libraries and add several at once
-    to any module. Each library is placed in the right source sets (commonMain, androidMain, iosMain, ...),
-    with version catalog entries, KSP configurations and Gradle plugins, and you see a diff before anything
-    is written. The Doctor flags commonMain dependencies that don't support your targets.
+    <p><b>Every Kotlin Multiplatform dependency, one click away.</b> Browse 4,800+ KMP, Compose Multiplatform and
+    Android libraries inside Android Studio or IntelliJ IDEA, select several at once, and add them to the right
+    place in your project.</p>
+
+    <p>Adding a library to a KMP project usually means: finding the latest version, putting the core artifact in
+    <code>commonMain</code>, the right engine in <code>androidMain</code> and <code>iosMain</code>, adding Gradle
+    plugins and KSP for every target, and hoping nothing Android-only ends up in <code>commonMain</code>.
+    KMP Dependency Hub does all of that for you, and shows the diff before anything is written.</p>
+
+    <h3>Features</h3>
+    <ul>
+      <li><b>Browse</b> the top libraries from <a href="https://klibs.io">klibs.io</a>, ranked by GitHub stars,
+          in 22 categories (Networking, Database, DI, Navigation, Images, …). More load as you scroll.</li>
+      <li><b>Search</b> klibs.io, Maven Central and Google Maven. New libraries appear as soon as they're published.</li>
+      <li><b>Recipes</b> for popular libraries (Ktor, Koin, Room, SQLDelight, Coil, kotlinx, …) install everything they
+          need: per-platform engines, BOMs, KSP processors for every target, Gradle plugins and config blocks.</li>
+      <li><b>Right source set, every time</b>: <code>commonMain</code>, <code>androidMain</code>, <code>iosMain</code>,
+          desktop and web, plus <code>libs.versions.toml</code> entries that reuse your existing aliases.</li>
+      <li><b>Platform-aware</b>: libraries that don't publish for one of your targets are kept out of
+          <code>commonMain</code>, before they break your iOS build.</li>
+      <li><b>Always current</b>: the latest stable versions from Maven Central and Google Maven.</li>
+      <li><b>Review first</b>: a diff of every change, applied as a single undoable action.</li>
+      <li><b>Doctor</b> (<i>Tools → KMP Hub: Run Doctor</i>) flags incompatible <code>commonMain</code> dependencies,
+          duplicates and available updates.</li>
+    </ul>
+
+    <h3>Getting started</h3>
+    <ol>
+      <li>Open the <b>KMP Hub</b> tool window on the right.</li>
+      <li>Browse a category or search, then tick the libraries you want.</li>
+      <li>Pick the module (and, optionally, a source set), press <b>Add</b>, review the diff and apply.</li>
+      <li>Sync Gradle.</li>
+    </ol>
+    <p>Prefer the command line? The same engine ships as a Gradle plugin:
+    <a href="https://github.com/KhubaibKhan4/kmp-dependency-hub#gradle-usage">kmpHubSearch, kmpHubAdd, kmpHubDoctor</a>.</p>
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>

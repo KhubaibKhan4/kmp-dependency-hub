@@ -71,10 +71,10 @@ def wait_for(workers, procs, total=None, timeout=3600):
     return False
 
 
-def stills(times):
+def stills(times, extra=""):
     STILLS.mkdir(parents=True, exist_ok=True)
     server = serve()
-    p = chrome(f"http://127.0.0.1:{PORT}/index.html?mode=stills&t={times}", BUILD / "chrome-stills")
+    p = chrome(f"http://127.0.0.1:{PORT}/index.html?mode=stills&t={times}{extra}", BUILD / "chrome-stills")
     ok = wait_for({"stills"}, [p], timeout=600)
     p.terminate(); server.shutdown()
     print("stills ok" if ok else "stills FAILED")
@@ -132,7 +132,7 @@ def encode(tl):
 if __name__ == "__main__":
     os.chdir(ROOT)
     if sys.argv[1] == "stills":
-        stills(sys.argv[2])
+        stills(sys.argv[2], "&nocap=1" if "--clean" in sys.argv else "")
     elif sys.argv[1] == "video":
         video(int(sys.argv[2]) if len(sys.argv) > 2 else 4)
     elif sys.argv[1] == "encode":

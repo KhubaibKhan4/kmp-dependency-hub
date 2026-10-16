@@ -66,7 +66,8 @@ intellijPlatform {
     instrumentCode = false
 
     pluginConfiguration {
-        id = "io.github.khubaibkhan4.kmpdependencyhub"
+        // Matches the first Marketplace upload; a plugin id can never change after that.
+        id = "io.github.kmphub.idea"
         name = "KMP Dependency Hub"
         version = project.version.toString()
         changeNotes = changeNotesHtml

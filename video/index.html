@@ -78,7 +78,7 @@ function renderAt(t) {
   octx.drawImage(renderer.domElement, 0, 0);
   // caption: in shortly after the scene starts, out before it ends
   const capA = clamp((lt - 0.35) / 0.35) * clamp((sc.end - t - 0.25) / 0.3);
-  drawCaption(octx, W, H, sc.caption, capA);
+  if (!params.has('nocap')) drawCaption(octx, W, H, sc.caption, capA);
   // dip to black between scenes; fade in at the very start and out at the very end
   let dark = 0;
   if (i > 0) dark = Math.max(dark, 1 - clamp(lt / DIP));

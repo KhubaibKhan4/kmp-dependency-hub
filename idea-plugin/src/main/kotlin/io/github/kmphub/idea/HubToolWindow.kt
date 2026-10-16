@@ -594,6 +594,10 @@ class HubPanel(
     internal fun toggleAt(index: Int) = toggle(listModel.getElementAt(index))
     internal val cartIds: List<String> get() = cart.keys.toList()
     internal fun selectListIndex(index: Int) { list.selectedIndex = index }
+    internal fun indexOfName(name: String): Int = (0 until listModel.size).firstOrNull {
+        val e = listModel.getElementAt(it)
+        e is Entry.Project && (e.recipe?.name == name || e.project.name == name)
+    } ?: -1
 
     private companion object {
         val RECIPES = Category("Recipes", null)

@@ -151,25 +151,27 @@ class HubPluginTest : HeavyPlatformTestCase() {
     fun `test render panel snapshot`() {
         val panel = HubPanel(project, testRootDisposable, goOnline = true)
         assertTrue(waitFor { panel.projectCount >= 50 && !panel.isLoading })
-        panel.toggleAt(0)
-        panel.toggleAt(2)
+        listOf("Ktor Client", "Koin").map(panel::indexOfName).filter { it >= 0 }.forEach(panel::toggleAt)
         waitFor(5_000) { panel.cartIds.size >= 2 }
         fun snap(name: String) {
             panel.setSize(460, 980)
             com.intellij.util.ui.UIUtil.uiTraverser(panel).forEach { it.doLayout() }
             panel.validate()
-            val image = java.awt.image.BufferedImage(460, 980, java.awt.image.BufferedImage.TYPE_INT_ARGB)
+            // 2x for crisp Marketplace screenshots.
+            val image = java.awt.image.BufferedImage(920, 1960, java.awt.image.BufferedImage.TYPE_INT_ARGB)
             val g = image.createGraphics()
+            g.setRenderingHint(java.awt.RenderingHints.KEY_TEXT_ANTIALIASING, java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB)
+            g.scale(2.0, 2.0)
             panel.printAll(g)
             g.dispose()
             javax.imageio.ImageIO.write(image, "png", java.io.File(System.getProperty("user.dir"), "build/kmphub-panel-$name.png"))
         }
-        panel.selectListIndex(1)
+        panel.selectListIndex(panel.indexOfName("Ktor Client").coerceAtLeast(0))
         waitFor(8_000) { false }
         snap("top")
         panel.selectCategory("Networking")
         assertTrue(waitFor { panel.projectCount >= 20 && !panel.isLoading })
-        panel.selectListIndex(3)
+        panel.selectListIndex(panel.indexOfName("Coil 3").coerceAtLeast(0))
         waitFor(8_000) { false }
         snap("networking")
     }

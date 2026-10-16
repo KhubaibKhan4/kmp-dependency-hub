@@ -10,7 +10,7 @@ one-time setup below, a release is: bump the version, update the changelog, push
 Done: the repository is <https://github.com/KhubaibKhan4/kmp-dependency-hub> (Apache-2.0), and `gradle.properties`
 sets the owner and vendor. That fixes the IDs, which can't change after the first publish:
 
-- Marketplace plugin: `io.github.khubaibkhan4.kmpdependencyhub`
+- Marketplace plugin: `io.github.kmphub.idea` (listing 35177: https://plugins.jetbrains.com/plugin/35177)
 - Gradle plugin: `io.github.khubaibkhan4` (the Plugin Portal accepts it when you sign in with the KhubaibKhan4 GitHub account)
 
 ### 2. JetBrains Marketplace
