@@ -39,6 +39,8 @@
     <p><a href="https://youtu.be/iO_Yv1gEgvw">Watch the 90-second tour on YouTube</a>.</p>
     <p>Prefer the command line? The same engine ships as a Gradle plugin:
     <a href="https://github.com/KhubaibKhan4/kmp-dependency-hub#gradle-usage">kmpHubSearch, kmpHubAdd, kmpHubDoctor</a>.</p>
+    <p>Free. If it saves you time, you can support its development on <a href="https://ko-fi.com/Y8Y2YABZ7">Ko-fi</a> or
+       <a href="https://www.buymeacoffee.com/khubaibkhan">Buy Me a Coffee</a>.</p>
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>

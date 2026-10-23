@@ -14,6 +14,8 @@ select several at once, and add them to the right source sets — engines, KSP a
 [![Rating](https://img.shields.io/jetbrains/plugin/r/rating/35177?color=3ddc84)](https://plugins.jetbrains.com/plugin/35177/reviews)
 [![Build](https://github.com/KhubaibKhan4/kmp-dependency-hub/actions/workflows/build.yml/badge.svg)](https://github.com/KhubaibKhan4/kmp-dependency-hub/actions/workflows/build.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/Y8Y2YABZ7)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support-FFDD00?logo=buymeacoffee&logoColor=black)](https://www.buymeacoffee.com/khubaibkhan)
 
 [**Install from JetBrains Marketplace →**](https://plugins.jetbrains.com/plugin/35177) &nbsp;·&nbsp; [**▶ Watch the 90-second tour**](https://youtu.be/iO_Yv1gEgvw)
 
@@ -135,6 +137,12 @@ export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 ```
 
 Releases are tag-driven; see [PUBLISHING.md](PUBLISHING.md).
+
+## Support
+
+KMP Dependency Hub is free. If it saves you time, you can support its development on [Ko-fi](https://ko-fi.com/Y8Y2YABZ7) or
+[Buy Me a Coffee](https://www.buymeacoffee.com/khubaibkhan). A rating or review on the [Marketplace page](https://plugins.jetbrains.com/plugin/35177/reviews)
+helps a lot too.
 
 ## Roadmap
 
